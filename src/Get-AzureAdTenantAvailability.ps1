@@ -40,12 +40,12 @@ Write-Verbose ("Sending request to '{0}'." -f $uri)
 $response = Invoke-WebRequest -Uri $uri -Method GET -SkipHttpErrorCheck
 switch ($response.StatusCode) {
     200 {
-        Write-Verbose "Received 200 status code, the tenant's name is unavailable."
-        return $false
+        Write-Verbose "Received 200 status code, the tenant's name is available."
+        return $true
     }
     404 {
-        Write-Verbose "Received 404 status code, the tenant's name is available."
-        return $true
+        Write-Verbose "Received 404 status code, the tenant's name is unavailable."
+        return $false
     }
     default {
         Write-Error -Message "Unable to determine result." -ErrorAction Stop
